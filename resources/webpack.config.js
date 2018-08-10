@@ -1,4 +1,5 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
@@ -10,46 +11,32 @@ module.exports = {
     // 出力するファイル名
     filename: '[name].bundle.js',
     // 出力先のパス
-    path: __dirname + '/../js/'
+    path: path.join(__dirname, '/../js/')
+  },
+  optimization: {
+    splitChunks: {
+      name: 'vendor',
+      chunks: 'initial'
+    }
   },
   module: {
-    // rules: [
-    //     {
-    //         test: /\.js$/,
-    //         exclude: /node_modules/,
-    //         loader: 'eslint-loader',
-    //     },
-    // ],
-    loaders: [
+    rules: [
       {
+        // ローダーの処理対象ファイル
         test: /\.js$/,
+        // ローダーの処理対象から外すディレクトリ
         exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ["es2015"]
-        }
+        use: [
+          {
+            // 利用するローダー
+            loader: 'babel-loader',
+            // ローダーのオプション
+            options: {
+              presets: [['env', { modules: false }]]
+            }
+          }
+        ]
       }
     ]
-  },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-    new webpack.optimize.UglifyJsPlugin()
-  ]
+  }
 };
-
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    }),
-
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        drop_console: true
-      }
-    })
-  ];
-}

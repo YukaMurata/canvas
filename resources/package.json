@@ -1,12 +1,14 @@
 {
-  "name": "webpack-commons-chunk-plugin-example",
+  "name": "webpack",
   "version": "1.0.0",
   "scripts": {
-    "dev": "webpack --watch"
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -24,11 +26,13 @@
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "3.0.1",
     "gulp-watch": "^5.0.1",
+    "path": "^0.12.7",
     "prettier": "^1.14.2",
     "simplenoise": "^1.0.1",
     "uglify-save-license": "^0.4.1",
     "velocity-animate": "^1.5.2",
-    "webpack": "^4.16.5"
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
   },
   "dependencies": {
     "animejs": "^2.0.2",
